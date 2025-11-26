@@ -1,6 +1,6 @@
 import sys
 import os
-from preproccess.handler import imageHandler
+from preproccess.handler import segmentImage
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
@@ -12,14 +12,13 @@ except Exception as e:
     print("model not loaded " + e)
     sys.exit(1)
 
-image = imageHandler("./images/DionDrawing2.png")
+image = "./images/24.png"
 if image is None:
-    ValueError("Error loading image, check path")    
+    print("image path not found")
+    sys.exit(1)
 
-prediction = model.predict(image)
-predicted_class = int(np.argmax(prediction, axis=1)[0])
-print(f"Predicted digit: {predicted_class}")
-
+result = segmentImage(image)
+print(result)
     
 
 
